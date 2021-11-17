@@ -18,11 +18,11 @@ class _RolloutDataset(torch.utils.data.Dataset): # pylint: disable=too-few-publi
 
         if train:
             # self._files = self._files[:-600] #original
-            self._files = self._files[:-60]
+            self._files = self._files[:-9]
             print(f"Train Files Count: {len(self._files)}")
         else:
             # self._files = self._files[-600:] # original 
-            self._files = self._files[-60:]
+            self._files = self._files[-9:]
             print(f"Test Files Count: {len(self._files)}")
 
         
