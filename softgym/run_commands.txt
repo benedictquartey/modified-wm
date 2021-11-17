@@ -9,3 +9,4 @@ Add save_video argument to save videos as well so you can play back rollout/poli
 Add headless argument to run faster without visualizations
 	python softgym_rollout.py --env_name RopeFlatten --rollout_num 3 --observation_mode cam_rgb --headless
 
+Python file has more arguments for whatever you want to do.
