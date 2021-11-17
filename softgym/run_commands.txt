@@ -1,0 +1,11 @@
+Generate data for 3 rollouts in RopeFlatten environment, observation type cam_rgb. Options ['point_cloud, cam_rgb, key_point'] 
+	python softgym_rollout.py --env_name RopeFlatten --rollout_num 3 --observation_mode cam_rgb 
+
+
+Add save_video argument to save videos as well so you can play back rollout/policy interaction during evaluation.
+	python softgym_rollout.py --env_name RopeFlatten --rollout_num 3 --observation_mode cam_rgb --save_video
+
+
+Add headless argument to run faster without visualizations
+	python softgym_rollout.py --env_name RopeFlatten --rollout_num 3 --observation_mode cam_rgb --headless
+
