@@ -204,7 +204,7 @@ while not es.stop():
                  'reward': - cur_best,
                  'state_dict': controller.state_dict()},
                 join(ctrl_dir, 'best.tar'))
-        if - best > args.target_return:
+        if best > args.target_return:
             print("Terminating controller training with value {}...".format(best))
             break
 
