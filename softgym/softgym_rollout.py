@@ -1,7 +1,7 @@
 import os
 import argparse
 import numpy as np
-
+from PIL import Image
 from softgym.registered_env import env_arg_dict, SOFTGYM_ENVS
 from softgym.utils.normalized_env import normalize
 from softgym.utils.visualization import save_numpy_as_gif
@@ -22,6 +22,8 @@ def main():
     parser.add_argument('--img_size', type=int, default=256, help='Size of the recorded videos')
 
     args = parser.parse_args()
+    obs_imgsize = 64
+    obs_width, obs_height = obs_imgsize, obs_imgsize
 
     # directory stuff
     rollout_dir = args.rollout_dir
@@ -69,6 +71,11 @@ def main():
                 obs, reward, done, info = env.step(action, record_continuous_video=True, img_size=args.img_size)
                 frames.extend(info['flex_env_recorded_frames'])
 
+            if (args.observation_mode == "cam_rgb"):
+                obs = Image.fromarray(obs).resize((obs_width, obs_height))
+                obs = np.array(obs)
+
+            
             obs_rollout.append(obs)
             r_rollout.append(reward)
             d_rollout.append(done)
@@ -79,8 +86,9 @@ def main():
         observations=np.array(obs_rollout),
         rewards=np.array(r_rollout),
         actions=np.array(a_rollout),
-        terminals=np.array(d_rollout),
-        info=np.array(i_rollout))
+        terminals=np.array(d_rollout))
+        # info=np.array(i_rollout))
+        print(f'Saved rollout_{episode}.npz')
         #Save video of rollout
         if args.save_video_dir is not None and args.save_video != False:
             save_name = os.path.join(args.save_video_dir, args.env_name + f'_{episode}.gif')
@@ -89,4 +97,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main() 
